@@ -2,7 +2,7 @@
 title: "Use Google Doc In R"
 author: "Samuel Mao"
 date: "October 19, 2018"
-output: html_document
+
 ---
 
 ```{r setup, include=FALSE}
