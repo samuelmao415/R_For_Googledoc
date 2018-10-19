@@ -1,0 +1,48 @@
+---
+title: "Use Google Doc In R"
+author: "Samuel Mao"
+date: "October 19, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(googlesheets)
+library(dplyr)
+gs_auth(new_user = TRUE)
+```
+
+enter authorization code
+
+```{r}
+#show list of google doc under your account
+gs_ls()
+```
+call doc from your account
+```{r}
+my_sheet<-gs_ls()
+my_sheet%>%glimpse() #show documents
+```
+
+supply name of the google doc here:
+```{r}
+for_gs <- gs_title("name of your sheets")
+```
+turn your sheet into a dataframe:
+```{r}
+for_gs_sheet <- gs_read(for_gs)
+str(for_gs_sheet)
+```
+
+modify spreadsheet: ws:worksheet (name or index); anchor: upperleft cell for edit
+```{r}
+gs_edit_cells(for_gs, ws = "name of your sheet", anchor = "A1", input = "your datafram or value", byrow = TRUE)
+```
+
+read google doc into R:
+```{r}
+sheet1 <- for_gs %>% gs_read_csv(ws = 1)
+sheet2<-for_gs %>% gs_read_csv(ws = 2)
+```
+
+Start playing!
+
